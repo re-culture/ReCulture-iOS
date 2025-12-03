@@ -199,13 +199,25 @@ extension RecordTypeVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         print("size for item at: \(indexPath)")
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecordTypeCollectionViewCell.identifier, for: indexPath) as? RecordTypeCollectionViewCell
-        else { return .zero }
-        cell.configure(recordTypeList[indexPath.item].rawValue)
+//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecordTypeCollectionViewCell.identifier, for: indexPath) as? RecordTypeCollectionViewCell
+//        else { return .zero }
+//        cell.configure(recordTypeList[indexPath.item].rawValue)
+//        
+//        let cellFrame = cell.getLabelFrame()
+//        let cellHeight = cellFrame.height + 30
+//        let cellWidth = CGFloat(collectionView.frame.width - 14 * 2)
+//
+//        return CGSize(width: cellWidth, height: cellHeight)
         
-        let cellFrame = cell.getLabelFrame()
-        let cellHeight = cellFrame.height + 30
+        let text = recordTypeList[indexPath.item].rawValue
         let cellWidth = CGFloat(collectionView.frame.width - 14 * 2)
+
+        // 라벨에 필요한 높이 계산
+        let labelFont = UIFont.rcFont18M() // 실제 셀에서 사용하는 font
+        let maxLabelWidth = cellWidth - 16 * 2 // 패딩 고려
+        let labelHeight = text.heightWithConstrainedWidth(width: maxLabelWidth, font: labelFont)
+
+        let cellHeight = labelHeight + 30 // 여유 공간 추가
 
         return CGSize(width: cellWidth, height: cellHeight)
     }
