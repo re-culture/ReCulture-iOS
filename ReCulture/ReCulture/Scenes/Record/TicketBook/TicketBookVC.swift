@@ -295,15 +295,26 @@ extension TicketBookVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == tagCollectionView {
-            guard let cell = tagCollectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as? TagCollectionViewCell else {
-                        return .zero
-                    }
+//            guard let cell = tagCollectionView.dequeueReusableCell(withReuseIdentifier: TagCollectionViewCell.identifier, for: indexPath) as? TagCollectionViewCell else {
+//                        return .zero
+//                    }
+//            
+//            cell.configure(tag: RecordType.allTypesWithAll[indexPath.item].rawValue)
+//
+//            let cellFrame = cell.getLabelFrame()
+//            let cellWidth = cellFrame.width + 24
+//            let cellHeight = cellFrame.height + 12
+//
+//            return CGSize(width: cellWidth, height: cellHeight)
             
-            cell.configure(tag: RecordType.allTypesWithAll[indexPath.item].rawValue)
-
-            let cellFrame = cell.getLabelFrame()
-            let cellWidth = cellFrame.width + 24
-            let cellHeight = cellFrame.height + 12
+            let tag = RecordType.allTypesWithAll[indexPath.item].rawValue
+            let label = UILabel()
+            label.text = tag
+            label.font = .rcFont16M()
+            label.sizeToFit()
+            
+            let cellWidth = label.frame.width + 24
+            let cellHeight = label.frame.height + 12
 
             return CGSize(width: cellWidth, height: cellHeight)
         }
